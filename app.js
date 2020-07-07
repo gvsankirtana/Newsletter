@@ -4,12 +4,12 @@ const request = require("request");
 const bodyParser = require("body-parser");
 const app = express();
 app.use(bodyParser.urlencoded({extended:true}));
-app.get("/",function(req,res){
+app.get("/",function(req,res){//get the data from server
     res.sendFile(__dirname + "/signup.html");
   })
-app.post("/",function(req,res){
- var Name = req.body.name;
- var Email =  req.body.email;
+app.post("/",function(req,res){//to send the data to server
+ var Name = req.body.name;//taking in the name 
+ var Email =  req.body.email;//taking in the email
  var data = {
      members: [
          {
@@ -18,19 +18,19 @@ app.post("/",function(req,res){
          }
      ]
  }
- var jsonData = JSON.stringify(data);
- const url = "https://us10.api.mailchimp.com/3.0/lists/9bac0ecd4b";
+ var jsonData = JSON.stringify(data);//converts data into a string format
+ const url = "https://us10.api.mailchimp.com/3.0/lists/9bac0ecd4b";//api mailchimp
  const options = {
      method: "POST",
      auth:"sanki2:235065a304a99a6008e40733fe575d1b-us10"
  }
  const request = https.request(url,options,function(response){
      if(response.statusCode === 200){
-         res.send("success");
+         res.sendFile("success");//if success then goes to success html page
      }else{
-         res.send("failure-");
+         res.sendFile("failure");// if failure then send the failure html page
      }
-   response.on("data",function(data){
+   response.on("data",function(data){//gets the data
        console.log(JSON.parse(data));
    })
  })
