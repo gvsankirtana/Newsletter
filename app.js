@@ -24,7 +24,7 @@ app.post("/",function(req,res){//to send the data to server
      method: "POST",
      auth:"sanki2:235065a304a99a6008e40733fe575d1b-us10"
  }
- const request = https.request(url,options,function(response){
+ const request = https.request(url,options,function(response){//sends request to the server
      if(response.statusCode === 200){
          res.sendFile("success");//if success then goes to success html page
      }else{
